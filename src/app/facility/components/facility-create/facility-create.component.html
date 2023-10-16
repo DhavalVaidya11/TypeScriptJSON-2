@@ -1,0 +1,90 @@
+<form #facilityCreateForm="ngForm" name="facilityCreateForm" autocomplete="off" novalidate>
+
+    <div class="col-sm-4">
+      <div class="form-group m-b-20">
+        <label for="">Name
+          <span class="text-red">*</span>
+        </label>
+        <input class="form-control" dlvAutofocus #facilityName="ngModel" name="facilityName" placeholder="ex. Gurgaon central"
+          [(ngModel)]="facilityDetails['name']" required>
+      </div>
+    </div>
+  
+    <div class="col-sm-4" *ngIf="isUpdate">
+      <div class="form-group m-b-20">
+        <label for="">Facility Code</label>
+        <input class="form-control" #facilityCode="ngModel" readonly="true" name="facilityCode" placeholder="ex. IND12345678"
+          [(ngModel)]="facilityDetails['facility_code']">
+      </div>
+    </div>
+  
+    <div class="col-sm-4">
+      <div class="form-group m-b-20">
+        <label for="">Allocated Area (in sqft)
+          <span class="text-red">*</span>
+        </label>
+        <input class="form-control" #facilityAllocatedArea="ngModel" name="facilityAllocatedArea" placeholder="i.e. 23.2323"
+        [(ngModel)]="facilityDetails['allocated_area']" 
+        (ngModelChange)="areaMaxSizeValidator($event)"
+        required pattern="^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$">
+        <span *ngIf="facilityAllocatedArea.errors?.pattern" class="text-error">
+          Only positive numbers allowed (i.e. 23)
+        </span>
+        <span *ngIf="!facilityAllocatedArea.errors?.pattern && !isSizeMaxArea" class="text-error">
+          Area can't be greater than 200000000
+        </span>
+      </div>
+    </div>
+  
+    <div class="col-sm-4">
+      <div class="form-group m-b-20">
+        <label for="">Business Unit
+          <span class="text-red">*</span>
+        </label>
+        <select class="form-control" #facilityBusinessUnit="ngModel" name="facilityBusinessUnit" [(ngModel)]="facilityDetails['business_unit']"
+          required>
+          <option *ngFor="let businessUnit of businessUnits" [ngValue]="businessUnit.val">
+            {{businessUnit.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+  
+    <div class="col-sm-4" *ngIf="!isUpdate">
+      <div class="form-group m-b-20">
+        <label for="">Sort Code
+          <span class="text-red">*</span>
+        </label>
+        <input class="form-control" #sortCode="ngModel" name="sortCode" placeholder="Enter sort code" [(ngModel)]="facilityDetails['facility_attributes'].sort_code"
+          required>
+      </div>
+    </div>
+  
+    <div class="col-sm-4">
+      <div class="form-group m-b-20">
+        <label for="">Facility Type
+          <span class="text-red">*</span>
+        </label>
+        <dlv-dropdown class="form-control custom-css" [isMulti]="true" [jsonData]="facilityTypes" [defaultData]="facilityDetails['facility_type']"
+          title="Select Facility Type" (filterEvent)="selectFacilityType($event)">
+        </dlv-dropdown>
+      </div>
+    </div>
+  
+    <div class="col-sm-4">
+      <div class="form-group m-b-20">
+        <label for="">Tenant <span class="text-red">*</span></label>
+        <select class="form-control" [(ngModel)]="facilityDetails['tenant']"
+          (ngModelChange)="selectTenant($event)" [ngModelOptions]="{standalone: true}"
+          required>
+          <option *ngFor="let tenant of tenantList" [ngValue]="tenant.val">
+            {{tenant.name}}</option>
+        </select>
+      </div>
+    </div>
+  
+  
+  
+    <div class="clearfix"></div>
+  </form>
+  
