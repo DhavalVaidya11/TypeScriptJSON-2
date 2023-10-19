@@ -16,6 +16,11 @@ const RegExpRule = {
     templateUrl: 'dynamic-form.component.html'
 })
 export class DynamicFormComponent implements OnChanges, OnInit {
+<<<<<<< HEAD
+=======
+    // @Input()
+    // config: any;
+>>>>>>> 4c6149c... Added feature of input fields
     @Output()   
     getDynamicFormData: EventEmitter<any> = new EventEmitter<any>();
     
@@ -36,7 +41,10 @@ export class DynamicFormComponent implements OnChanges, OnInit {
             properties: {
                 name: {
                     type: "string",
+<<<<<<< HEAD
                     description: "Name of the facility",
+=======
+>>>>>>> 4c6149c... Added feature of input fields
                 },
                 code: {
                     type: "string",
@@ -47,6 +55,7 @@ export class DynamicFormComponent implements OnChanges, OnInit {
                 active: {
                     type: "boolean"
                 },
+<<<<<<< HEAD
                 tenant: {
                     type: "string",
                     enum: [
@@ -82,6 +91,19 @@ export class DynamicFormComponent implements OnChanges, OnInit {
                 this.jsonData.push(payload);
             })
         }
+=======
+            },
+            required: ["allocatedArea", "name"],
+          };
+    }
+
+    creatingArrayOfProperties(data: any) {
+        Object.keys(data.properties).forEach((key:any) => {
+            this.jsonData.push(data.properties[key]);
+        })
+        return this.jsonData;
+    }
+>>>>>>> 4c6149c... Added feature of input fields
 
     ngOnChanges() {
         if(this.form) {
