@@ -1,0 +1,9 @@
+<div [formGroup]="form" (change)="handleSubmit($event)" (input)="handleSubmit($event)">
+    <ng-container
+        *ngFor="let field of creatingArrayOfProperties(this.config);"
+        dynamicField
+        [config]="field"
+        [group]="form">
+    </ng-container>
+    <div class="clearfix"></div>
+</div>

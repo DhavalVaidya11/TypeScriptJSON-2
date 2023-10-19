@@ -1,0 +1,20 @@
+<div class="col-sm-4" [title]="config.description">
+    <div class="form-group m-b-20" [formGroup]="group" >
+      <label class="bold-label-text">
+        {{config.name}}
+        <span *ngIf="config.mandatory" class="text-red">*</span>
+      </label>
+  
+      <input
+        [required]="config.mandatory"
+        class="form-control"
+        type="text"
+        [formControlName]="config.name"
+        maxlength="{{config.type==='TIME' ? '5' : '200'}}"
+        placeholder="{{config.type==='TIME' ? 'HH:MM (ex. 23:59)' : 'Enter ' + this.config.type}}">
+        
+      <span *ngIf="group.get(config.name)?.errors && config.type==='INTEGER'" class="text-error">Please enter positive number. (ex. 223)</span>
+      <span *ngIf="group.get(config.name)?.errors && config.type==='FLOAT'" class="text-error">Please enter positive number. (ex. 223.324)</span>
+      <span *ngIf="group.get(config.name)?.errors && config.type==='TIME'" class="text-error">Please enter valid time (HH:MM) (ex. 13:53).</span>
+    </div>
+  </div>
