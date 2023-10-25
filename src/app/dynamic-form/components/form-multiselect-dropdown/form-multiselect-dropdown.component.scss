@@ -1,0 +1,61 @@
+/* Container for the dropdown */
+.custom-multiselect-dropdown {
+    position: relative;
+    display: inline-block;
+    width: 200px; /* Set your desired width */
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Dropdown button styles */
+  .custom-multiselect-dropdown button {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+  }
+  
+  /* Dropdown list styles */
+  .custom-multiselect-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 200px; /* Set your desired maximum height */
+    overflow-y: auto;
+    display: none;
+  }
+  
+  .custom-multiselect-dropdown ul li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .custom-multiselect-dropdown ul li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* Show the dropdown when the button is clicked */
+  .custom-multiselect-dropdown.open ul {
+    display: block;
+  }
+  
+  /* Additional styles for selected items (if applicable) */
+  .custom-multiselect-dropdown.selected-items {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Add more styles as needed for your project */
+  

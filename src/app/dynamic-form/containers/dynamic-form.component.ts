@@ -16,8 +16,6 @@ const RegExpRule = {
     templateUrl: 'dynamic-form.component.html'
 })
 export class DynamicFormComponent implements OnChanges, OnInit {
-    // @Input()
-    // config: any;
     @Output()   
     getDynamicFormData: EventEmitter<any> = new EventEmitter<any>();
     
@@ -38,6 +36,7 @@ export class DynamicFormComponent implements OnChanges, OnInit {
             properties: {
                 name: {
                     type: "string",
+                    description: "Name of the facility",
                 },
                 code: {
                     type: "string",
@@ -48,17 +47,41 @@ export class DynamicFormComponent implements OnChanges, OnInit {
                 active: {
                     type: "boolean"
                 },
+                tenant: {
+                    type: "string",
+                    enum: [
+                        'Advantis',
+                        'Delhivery',
+                        'EDesh',
+                        'GrameenPhone',
+                    ]
+                },
+                facilitytype: {
+                    type: 'array',
+                    items: {
+                        type: 'string',
+                        enum: [
+                            'CollectionPoint',
+                            'DispatchCenter',
+                        ]
+                    },
+                }
             },
             required: ["allocatedArea", "name"],
           };
-    }
-
-    creatingArrayOfProperties(data: any) {
-        Object.keys(data.properties).forEach((key:any) => {
-            this.jsonData.push(data.properties[key]);
-        })
-        return this.jsonData;
-    }
+            Object.keys(this.config.properties).forEach((key:any) => {
+                let payload;
+                debugger
+                if(this.config.required.indexOf(key) != -1) {
+                    debugger
+                    payload = { ...this.config.properties[key], name: key, mandatory: true};
+                }
+                else {
+                    payload = { ...this.config.properties[key], name: key, };
+                }
+                this.jsonData.push(payload);
+            })
+        }
 
     ngOnChanges() {
         if(this.form) {

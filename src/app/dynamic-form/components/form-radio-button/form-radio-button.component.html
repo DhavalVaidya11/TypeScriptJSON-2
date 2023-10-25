@@ -1,0 +1,19 @@
+<div class="col-sm-3" [title]="config.description">
+  <div class="form-group m-b-20" [formGroup]="group">
+    <label class="bold-label-text">
+      {{config.name}}
+      <span *ngIf="config.mandatory" class="text-red">*</span>
+    </label>
+
+    <div class="switch">
+      <label>
+        <input type="radio" [formControlName]="config.name" [value]="true">
+        <span [ngClass]="config.default_value ? 'checked' : ''">Yes</span>
+      </label>
+      <label>
+        <input type="radio" [formControlName]="config.name" [value]="false">
+        <span [ngClass]="!config.default_value ? 'checked' : ''">No</span>
+      </label>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="col-sm-3" [title]="config.description">
+    <div class="form-group m-b-20" [formGroup]="group">
+      <label class="bold-label-text">
+        {{config.name}}
+        <span *ngIf="config.mandatory" class="text-red">*</span>
+      </label>
+
+        <ng-multiselect-dropdown
+        [placeholder]="config.description"
+        [settings]="dropdownSettings"
+        [data]="config.items.enum"
+        [(ngModel)]="selectedItems"
+        (onSelect)="onItemSelect($event)"
+        (onSelectAll)="onSelectAll($event)"
+        class="custom-multiselect-dropdown"
+        >
+        </ng-multiselect-dropdown>
+
+    </div>
+</div>

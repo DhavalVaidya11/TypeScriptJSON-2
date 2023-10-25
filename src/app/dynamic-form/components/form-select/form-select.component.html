@@ -1,0 +1,14 @@
+<div class="col-sm-4" [title]="config.description">
+  <div class="form-group m-b-20" [formGroup]="group">
+    <label class="bold-label-text">
+      {{ config.name }}
+      <span *ngIf="config.mandatory" class="text-red">*</span>
+    </label>
+
+    <select class="form-control" [formControlName]="config.name">
+      <option [value]="option" *ngFor="let option of config.enum">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 <div [formGroup]="form" (change)="handleSubmit($event)" (input)="handleSubmit($event)">
     <ng-container
-        *ngFor="let field of creatingArrayOfProperties(this.config);"
+        *ngFor="let field of jsonData;"
         dynamicField
         [config]="field"
         [group]="form">
