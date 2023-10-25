@@ -3,9 +3,15 @@ import { FormInputComponent } from "../dynamic-form/components/form-input/form-i
 import { FormGroup } from "@angular/forms";
 import { FieldConfig } from "../dynamic-form/models/field-config.interface";
 import { Field } from "../dynamic-form/models/field.interface";
+import { FormSelectComponent } from "../dynamic-form/components/form-select/form-select.component";
+import { FormRadioButtonComponent } from "../dynamic-form/components/form-radio-button/form-radio-button.component";
+import { FormMultiselectDropdownComponent } from "../dynamic-form/components/form-multiselect-dropdown/form-multiselect-dropdown.component";
 
 const components: {[type: string]: Type<Field>} = {
-    input: FormInputComponent
+    input: FormInputComponent,
+    select: FormSelectComponent,
+    radio: FormRadioButtonComponent,
+    multichoice: FormMultiselectDropdownComponent
 }
 
 @Directive({
@@ -50,11 +56,11 @@ export class DynamicFieldDirective implements Field, OnChanges, OnInit {
 
     chooseFormComponent = (type: string) => {
         type = type.toLowerCase();
-        if(type === 'option') {
+        if(type === 'string' && this.config.enum) {
             return 'select';
         } else if (type === 'boolean') {
             return 'radio';
-        } else if (type === 'multichoice') {
+        } else if (type === 'array') {
             return 'multichoice';
         } else {
             return 'input';

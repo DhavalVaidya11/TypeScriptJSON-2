@@ -9,5 +9,7 @@ export interface FieldConfig {
     options: Array<any>,
     facility_type: Array<any>,
     description: string,
-    group_name: string
+    group_name: string,
+    enum: Array<any>,
+    items: any;
 }
